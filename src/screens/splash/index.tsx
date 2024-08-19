@@ -24,7 +24,7 @@ const Splash = () => {
           style={styles.btn}
           onPress={() => navigation.navigate('WelcomeScreenOne')}
         >
-          <Text style={styles.btnText}>Get Started</Text>
+          <Text style={styles.btnText}>Next</Text>
         </TouchableOpacity>
       </View>
     )
