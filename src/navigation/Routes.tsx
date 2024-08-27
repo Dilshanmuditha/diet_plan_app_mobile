@@ -7,6 +7,7 @@ import WelcomeOne from '../screens/welcomeOne';
 import WelcomeTwo from '../screens/welcomeTwo';
 import Register from '../screens/register';
 import Login from '../screens/login';
+import CameraComponent from '../screens/camera';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const Routes = () => {
         <Stack.Screen name="WelcomeScreenTwo" component={WelcomeTwo} />
         <Stack.Screen name="LoginScreen" component={Login} />
         <Stack.Screen name="RegisterScreen" component={Register} />
+        <Stack.Screen name="CameraScreen" component={CameraComponent} />
       </Stack.Navigator>
     </NavigationContainer>
   );
