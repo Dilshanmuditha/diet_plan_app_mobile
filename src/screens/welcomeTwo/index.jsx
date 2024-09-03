@@ -26,7 +26,7 @@ const WelcomeTwo = () => {
           </View>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.navigate('CameraScreen')}>
+            onPress={() => navigation.navigate('RegisterScreen')}>
             <Text style={styles.btnText}>Get Start</Text>
           </TouchableOpacity>
           <TouchableOpacity
