@@ -1,6 +1,5 @@
 import axios from 'axios'; 
-import {getToken, saveToken} from './TokenService';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // const baseURL =  "http://10.0.2.2:8000/" 
 const baseURL =  "http://10.0.2.2:5000/" 
 
@@ -11,6 +10,27 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+const saveToken = async token => {
+  try {
+    await AsyncStorage.removeItem('token');
+    if (token) {
+      await AsyncStorage.setItem('token', token);
+    }
+  } catch (error) {
+    console.error('Error saving token:', error);
+  }
+};
+
+const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    return token;
+  } catch (error) {
+    console.error('Error getting token:', error);
+    return null;
+  }
+};
 
 export const loginUser = async (email, password) => {
   const response = await fetch(`${baseURL}login`, {
@@ -108,5 +128,7 @@ export {
   fetchCategoriesData,
   fetchPreferenceData,
   fetchLocationsData,
+  saveToken,
+  getToken,
   baseURL,
 };

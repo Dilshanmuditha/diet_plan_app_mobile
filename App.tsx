@@ -8,16 +8,15 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { useCallback } from 'react'
+import {useCallback} from 'react';
 import Routes from './src/navigation/Routes';
-
+import {AuthProvider} from './AuthContext';
 
 function App(): React.JSX.Element {
- 
   return (
-    <View style={{ flex: 1 }}>
+    <AuthProvider>
       <Routes />
-    </View>
+    </AuthProvider>
   );
 }
 
@@ -30,4 +29,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+});

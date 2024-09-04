@@ -1,11 +1,21 @@
 import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { ColorSheet } from '../../utils/ColorSheet'
+import { useAuth } from '../../../AuthContext'
 
 const Splash = () => {
     const navigation = useNavigation()
+    const {user, loadUserFromStorage} = useAuth();
+
+    useEffect(() => {
+      if (user) {
+        console.log(user)
+        navigation.navigate('HomeScreen');
+      }
+    }, [user]);
+
     return (
       <View style={styles.container}>
         <StatusBar

@@ -12,7 +12,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 import styles from './styles';
-import { fetchUserData } from '../../../ApiService';
+import { baseURL, fetchUserData, loginUser, saveToken } from '../../../ApiService';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -21,7 +21,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {GoogleSignin} from 'react-native-google-signin';
 import {ActivityIndicator} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {saveToken} from '../../TokenService';
+import { useAuth } from '../../../AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,6 +39,7 @@ const Login = () => {
   const [rightIcon, setRightIcon] = useState('eye');
   const [rightIconColor, setRightIconColor] = useState('#0C8A7B');
   const navigation = useNavigation();
+  const {user, login} = useAuth();
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -71,24 +72,68 @@ const Login = () => {
   const showToast = () => {
     ToastAndroid.show('Login successfull!', ToastAndroid.SHORT);
   };
-
   const handleLogin = async () => {
-   if (email && password) {
-    try {
-      setLoading(true);
-      await login(email, password);
-      showToast(); 
-      navigation.navigate('protectedScreen');
-    } catch (error) {
-      console.log(error);
-      setErrorMessage('Invalid Username or Password.');
-    } finally {
-      setLoading(false);
+    if (email && password) {
+     try {
+       setLoading(true);
+       await login(email, password);
+       showToast(); 
+       navigation.navigate('HomeScreen');
+     } catch (error) {
+       console.log(error);
+       setErrorMessage('Invalid Username or Password.');
+     } finally {
+       setLoading(false);
+     }
+    }else{
+     setErrorMessage('Input fields are required');
     }
-   }else{
-    setErrorMessage('Input fields are required');
-   }
-  };
+   };
+  // const handleLogin = async () => {
+  //  if (email && password) {
+  //   const body = {
+  //     email: email,
+  //     password: password
+  //   };
+  //   try {
+  //     setLoading(true);
+  //     const response = await login(email, password);
+  //       console.log(response)
+  //       if (response) {
+  //         await AsyncStorage.setItem('userData', JSON.stringify(data.data));
+  //         await saveToken(data.token);
+  //         showToast(); 
+  //         navigation.navigate('HomeScreen');
+  //       } else {
+  //         setErrorMessage('Login Failed: Invalid credentials');
+  //       }
+  //     // if (response.headers.get('Content-Type')?.includes('application/json')) {
+  //     //   const data = await response.json();
+  //     //   console.log(data)
+  //     //   if (response.ok) {
+  //     //     await AsyncStorage.setItem('userData', JSON.stringify(data.data));
+  //     //     await saveToken(data.token);
+  //     //     showToast(); 
+  //     //     navigation.navigate('HomeScreen');
+  //     //   } else {
+  //     //     setErrorMessage('Login Failed: Invalid credentials');
+  //     //   }
+  //     // } else {
+  //     //   const errorText = await response.text();
+  //     //   console.error('Unexpected response format:', errorText);
+  //     //   setErrorMessage('Login Failed: Invalid credentials');
+  //     // }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setErrorMessage('Invalid Username or Password.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  //  }else{
+  //   setErrorMessage('Input fields are required');
+  //  }
+  // };
+
   return (
     <SafeAreaView
     style={{flex: 1, backgroundColor: '#F5F5ED', alignContent: 'center'}}>
