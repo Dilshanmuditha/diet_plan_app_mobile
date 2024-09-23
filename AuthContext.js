@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {baseURL, loginUser, saveToken} from './ApiService';
+import {baseURL, getToken, loginUser, saveToken} from './ApiService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthContext = createContext();
@@ -36,11 +36,10 @@ export const AuthProvider = ({children}) => {
   };
 
   const logout = async () => {
-    // Remove user data from AsyncStorage
     try {
       const token = await getToken();
-
-      await fetch(`${baseURL}api/user/logout`, {
+      console.log("token",token)
+      await fetch(`${baseURL}logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

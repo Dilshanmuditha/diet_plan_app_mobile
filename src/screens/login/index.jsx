@@ -78,7 +78,7 @@ const Login = () => {
        setLoading(true);
        await login(email, password);
        showToast(); 
-       navigation.navigate('HomeScreen');
+       navigation.navigate('protectedScreen');
      } catch (error) {
        console.log(error);
        setErrorMessage('Invalid Username or Password.');

@@ -2061,6 +2061,15 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
+"@react-navigation/bottom-tabs@^6.6.1":
+  version "6.6.1"
+  resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.6.1.tgz"
+  integrity sha512-9oD4cypEBjPuaMiu9tevWGiQ4w/d6l3HNhcJ1IjXZ24xvYDSs0mqjUcdt8SWUolCvRrYc/DmNBLlT83bk0bHTw==
+  dependencies:
+    "@react-navigation/elements" "^1.3.31"
+    color "^4.2.3"
+    warn-once "^0.1.0"
+
 "@react-navigation/core@^6.4.17":
   version "6.4.17"
   resolved "https://registry.npmjs.org/@react-navigation/core/-/core-6.4.17.tgz"
@@ -6307,6 +6316,11 @@ react-is@^16.7.0:
 
 react-is@^17.0.1:
   version "17.0.2"
+
+react-native-exit-app@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/react-native-exit-app/-/react-native-exit-app-2.0.0.tgz"
+  integrity sha512-vr9e/8jgPcKCBw6qo0QLxfeMiTwExydghbYDqpLZYAGWR+6cbgnhvOxwdYj/JWR7ZtOALrRA4GMGSvU/ayxM7w==
 
 react-native-gesture-handler@^2.18.1, "react-native-gesture-handler@>= 1.0.0":
   version "2.18.1"

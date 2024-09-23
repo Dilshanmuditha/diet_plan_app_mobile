@@ -12,7 +12,7 @@ const Splash = () => {
     useEffect(() => {
       if (user) {
         console.log(user)
-        navigation.navigate('HomeScreen');
+        navigation.navigate('protectedScreen');
       }
     }, [user]);
 
