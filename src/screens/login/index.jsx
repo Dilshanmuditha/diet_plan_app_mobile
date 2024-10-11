@@ -80,6 +80,7 @@ const Login = () => {
        showToast(); 
        navigation.navigate('protectedScreen');
      } catch (error) {
+       setLoading(false);
        console.log(error);
        setErrorMessage('Invalid Username or Password.');
      } finally {

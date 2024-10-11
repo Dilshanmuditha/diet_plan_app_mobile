@@ -9,9 +9,10 @@ import {
 import styles from './styles';
 import {ActivityIndicator, Text} from 'react-native-paper';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {baseURL, getToken} from '../../../ApiService';
 import { useAuth } from '../../../AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('window');
 const HomeScreen = () => {
@@ -22,6 +23,15 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [errorMessage, setErrorMessage] = useState('');
   const {user, loadUserFromStorage} = useAuth();
+
+  useFocusEffect(
+    React.useCallback(() => { 
+      loadUserFromStorage();
+      return () => {
+        console.log('home is unfocused');
+      };
+    }, []),
+  );
 
  useEffect(() => {
     // Fetch user data when the component mounts
@@ -43,9 +53,6 @@ const HomeScreen = () => {
           height: height,
           weight: weight,
         };
-
-        console.log('body', body);
-
         const response = await fetch(`${baseURL}bmi-calculate`, {
           method: 'POST',
           headers: {
@@ -104,6 +111,8 @@ const HomeScreen = () => {
         console.log(data);
         if (response.ok) {
           showToast("BMI value saved");
+          await AsyncStorage.setItem('userData', JSON.stringify(data));
+          await loadUserFromStorage();
         } else {
           setErrorMessage('Save Failed');
         }
@@ -139,6 +148,7 @@ const HomeScreen = () => {
             style={styles.textInput}
             onChangeText={setHeight}
             behavior={Platform.OS === 'ios' ? 'padding' : 'null'}
+            keyboardType='number-pad'
           />
           <TextInput
             value={weight}
@@ -149,6 +159,7 @@ const HomeScreen = () => {
             style={styles.textInput}
             onChangeText={setWeight}
             behavior={Platform.OS === 'ios' ? 'padding' : 'null'}
+            keyboardType='number-pad'
           />
         </View>
 
@@ -177,14 +188,19 @@ const HomeScreen = () => {
         </View>
       </View>
       <View style={styles.container2}>
+      <TouchableOpacity onPress={() => console.log("hello")}>
         <View style={styles.container2_Content}>
           <Text style={styles.container2_ContentTxt}>Get Nutrition Plan</Text>
         </View>
-        <View style={styles.container2_Content}>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ExerciseScheduleScreen')}>
+        <View style={styles.container2_Content} >
+        
           <Text style={styles.container2_ContentTxt}>
-            Get Excersise Schedule
+            Get Exercise Schedule
           </Text>
-        </View>
+          
+        </View></TouchableOpacity>
       </View>
     </ScrollView>
   );

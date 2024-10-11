@@ -15,6 +15,7 @@ import SideImageScreen from '../screens/side';
 import FrontImageScreen from '../screens/front';
 import { BottomNavigation } from 'react-native-paper';
 import BottomTabNavigation from './stack/BottomTabNavigation';
+import ExerciseSchedule from '../screens/excersie';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ const Routes = () => {
         <Stack.Screen name="BackImgScreen" component={BackImageScreen} />
         <Stack.Screen name="SideImgScreen" component={SideImageScreen} />
         <Stack.Screen name="FrontImgScreen" component={FrontImageScreen} />
+        <Stack.Screen name="ExerciseScheduleScreen" component={ExerciseSchedule} />
         <Stack.Screen
           name="protectedScreen"
           component={BottomTabNavigation}
