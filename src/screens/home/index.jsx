@@ -11,8 +11,12 @@ import {ActivityIndicator, Text} from 'react-native-paper';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {baseURL, getToken} from '../../../ApiService';
-import { useAuth } from '../../../AuthContext';
+import {useAuth} from '../../../AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Assistants from '../../components/Assistants';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CarouselComponent from '../../components/carosel';
+import TopAssistants from '../../components/TopAssistants';
 
 const {width, height} = Dimensions.get('window');
 const HomeScreen = () => {
@@ -25,7 +29,7 @@ const HomeScreen = () => {
   const {user, loadUserFromStorage} = useAuth();
 
   useFocusEffect(
-    React.useCallback(() => { 
+    React.useCallback(() => {
       loadUserFromStorage();
       return () => {
         console.log('home is unfocused');
@@ -33,14 +37,14 @@ const HomeScreen = () => {
     }, []),
   );
 
- useEffect(() => {
+  useEffect(() => {
     // Fetch user data when the component mounts
     if (!user) {
       loadUserFromStorage();
     }
   }, [loadUserFromStorage, user]);
-  
-  const showToast = (message) => {
+
+  const showToast = message => {
     ToastAndroid.show(message, ToastAndroid.SHORT);
   };
 
@@ -66,7 +70,7 @@ const HomeScreen = () => {
           const data = await response.json();
           console.log(data);
           if (response.ok) {
-            showToast("BMI Calculated");
+            showToast('BMI Calculated');
             setBMI(data.data);
           } else {
             setErrorMessage('Calculation Failed');
@@ -105,12 +109,12 @@ const HomeScreen = () => {
         },
         body: JSON.stringify(body), // Convert the body to a JSON string
       });
-      console.log(response)
+      console.log(response);
       if (response.headers.get('Content-Type')?.includes('application/json')) {
         const data = await response.json();
         console.log(data);
         if (response.ok) {
-          showToast("BMI value saved");
+          showToast('BMI value saved');
           await AsyncStorage.setItem('userData', JSON.stringify(data));
           await loadUserFromStorage();
         } else {
@@ -127,15 +131,28 @@ const HomeScreen = () => {
     }
   };
   return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#F5F5ED',
+        alignContent: 'center',
+      }}>
     <ScrollView style={styles.container}>
       <View style={styles.container1}>
-        <Text style={styles.header1}>Hello! {user?.data?.name || "User not found"} </Text>
-        <Text style={styles.header2}>Last BMI Value: {user?.data?.bmi ? (parseFloat(user?.data?.bmi).toFixed(2)) : "0.00"}</Text>
+        <Text style={styles.header1}>
+          Hello! {user?.data?.name || 'User not found'}{' '}
+        </Text>
+        <Text style={styles.header2}>
+          Last BMI Value:{' '}
+          {user?.data?.bmi ? parseFloat(user?.data?.bmi).toFixed(2) : '0.00'}
+        </Text>
       </View>
+      <CarouselComponent />
       <View style={styles.container2Main}>
         <View style={styles.container2_Header}>
           <Text style={styles.header3}>
-            Input your height as cm and weight as Kg for calculate the BMI.
+            Input your height as meters and weight as Kg for calculate the BMI.
           </Text>
         </View>
         <View style={styles.container2_input}>
@@ -148,7 +165,7 @@ const HomeScreen = () => {
             style={styles.textInput}
             onChangeText={setHeight}
             behavior={Platform.OS === 'ios' ? 'padding' : 'null'}
-            keyboardType='number-pad'
+            keyboardType="number-pad"
           />
           <TextInput
             value={weight}
@@ -159,7 +176,7 @@ const HomeScreen = () => {
             style={styles.textInput}
             onChangeText={setWeight}
             behavior={Platform.OS === 'ios' ? 'padding' : 'null'}
-            keyboardType='number-pad'
+            keyboardType="number-pad"
           />
         </View>
 
@@ -176,33 +193,37 @@ const HomeScreen = () => {
               <Text style={styles.bmiButtonTxt}>Calculate BMI</Text>
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.bmiButton} onPress={saveBMI}>
-            <Text style={styles.bmiButtonTxt}>Save BMI</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.container2_btn}>
           <Text style={styles.bmiResultTxt}>
             Your BMI value is {parseFloat(bmi).toFixed(2)}
           </Text>
+
+          <TouchableOpacity style={styles.savebmiButton} onPress={saveBMI}>
+            <Text style={styles.savebmiButtonTxt}>Save BMI</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.container2}>
-      <TouchableOpacity onPress={() => console.log("hello")}>
-        <View style={styles.container2_Content}>
-          <Text style={styles.container2_ContentTxt}>Get Nutrition Plan</Text>
-        </View>
+      <TopAssistants/>
+      <Assistants/>
+      {/* <View style={styles.container2}>
+        <TouchableOpacity onPress={() => console.log('hello')}>
+          <View style={styles.container2_Content}>
+            <Text style={styles.container2_ContentTxt}>Get Nutrition Plan</Text>
+          </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('ExerciseScheduleScreen')}>
-        <View style={styles.container2_Content} >
-        
-          <Text style={styles.container2_ContentTxt}>
-            Get Exercise Schedule
-          </Text>
-          
-        </View></TouchableOpacity>
-      </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ExerciseScheduleScreen')}>
+          <View style={styles.container2_Content}>
+            <Text style={styles.container2_ContentTxt}>
+              Get Exercise Schedule
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View> */}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

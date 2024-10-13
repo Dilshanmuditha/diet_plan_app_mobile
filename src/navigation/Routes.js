@@ -10,7 +10,7 @@ import Login from '../screens/login';
 import CameraComponent from '../screens/camera';
 import HeightDetect from '../screens/HeightDetect';
 import HomeScreen from '../screens/home';
-import BackImageScreen from '../screens/back';
+import BackImageScreen from '../screens/locations';
 import SideImageScreen from '../screens/side';
 import FrontImageScreen from '../screens/front';
 import { BottomNavigation } from 'react-native-paper';
