@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
-import {Camera, useCameraDevice} from 'react-native-vision-camera';
 
 const {width, height} = Dimensions.get('window');
 const SideImageScreen = () => {

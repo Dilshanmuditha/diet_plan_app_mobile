@@ -26,33 +26,20 @@ const Assistants = () => {
   const navigation = useNavigation();
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
-
-  //   const fetchRecentToysData = async () => {
-  //     try {
-  //       const token = await getToken();
-  //       const response = await fetch(`${baseURL}api/user/recentToys`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const data = await response.json();
-  //       return data.toys.data;
-  //     } catch (error) {
-  //       console.error('Error fetching Recent toys:', error);
-  //     }
-  //   };
+  const randomNames = [
+    'Alex Johnson', 'Chris Evans', 'Jordan Brown', 'Taylor Swift', 
+    'Morgan Lee', 'Jamie Foxx', 'Casey Grant', 'Robin White', 'Dilshan Muditha'
+  ];
+  const getRandomPersonImage = () => `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/100/100`;
+  const getRandomName = () => randomNames[Math.floor(Math.random() * randomNames.length)];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const responseRecentToys = await fetchRecentToysData();
-        // setRecentToys(responseRecentToys);
         const data = [
           {
             id: 1,
-            name: 'Dilshan Muditha',
+            name: getRandomName(),
             experience: 'Expert',
             review: '5',
             age: '20',
@@ -60,7 +47,7 @@ const Assistants = () => {
           },
           {
             id: 2,
-            name: 'Dilshan Muditha',
+            name: getRandomName(),
             experience: 'Beginner',
             review: '2',
             age: '20',
@@ -68,7 +55,7 @@ const Assistants = () => {
           },
           {
             id: 3,
-            name: 'Dilshan Muditha',
+            name: getRandomName(),
             experience: 'Intermidiate',
             review: '1',
             age: '20',
@@ -76,14 +63,45 @@ const Assistants = () => {
           },
           {
             id: 4,
-            name: 'Dilshan Muditha',
+            name: getRandomName(),
             experience: 'Expert',
             review: '3',
             age: '20',
             sex: 'Female',
           },
+          {
+            id: 5,
+            name: getRandomName(),
+            experience: 'Expert',
+            review: '3',
+            age: '20',
+            sex: 'Female',
+          },
+          {
+            id: 6,
+            name: getRandomName(),
+            experience: 'Expert',
+            review: '3',
+            age: '20',
+            sex: 'Female',
+          },
+          {
+            id: 7,
+            name: getRandomName(),
+            experience: 'Expert',
+            review: '3',
+            age: '20',
+            sex: 'Female',
+          },
+          {
+            id: 8,
+            name: getRandomName(),
+            experience: 'Beginner',
+            review: '3',
+            age: '20',
+            sex: 'Female',
+          },
         ];
-        //   console.log('Banners:', data);  // Log banners
         setAccounts(data);
         setLoading(false);
       } catch (error) {
@@ -97,8 +115,8 @@ const Assistants = () => {
     return (
       <View style={styles.view}>
         <TouchableOpacity style={styles.viewTouch} onPress={() => {}}>
-          <Image
-            source={require('../assets/persons/meImage.jpg')}
+        <Image
+            source={{uri: getRandomPersonImage()}} // Use the random person image URL
             style={styles.image}
           />
           <View style={styles.contentView}>
@@ -138,16 +156,11 @@ const Assistants = () => {
         width: '100%',
         backgroundColor: '#F5F5ED',
         alignContent: 'center',
+        marginBottom:65
       }}>
       <View style={styles.suggestTxtView}>
         <Text style={styles.suggestTxt}>Personal Assistants</Text>
-        <Icon
-          name="chevron-right-circle-outline"
-          size={25}
-          color="#000000"
-          style={styles.suggestIcon}
-          onPress={() => {}}
-        />
+        
       </View>
       <FlatList
         data={accounts}

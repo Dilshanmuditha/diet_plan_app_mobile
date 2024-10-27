@@ -17,6 +17,7 @@ import Assistants from '../../components/Assistants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CarouselComponent from '../../components/carosel';
 import TopAssistants from '../../components/TopAssistants';
+import Advertisement from '../../components/Advertisements';
 
 const {width, height} = Dimensions.get('window');
 const HomeScreen = () => {
@@ -28,14 +29,14 @@ const HomeScreen = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const {user, loadUserFromStorage} = useAuth();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      loadUserFromStorage();
-      return () => {
-        console.log('home is unfocused');
-      };
-    }, []),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     loadUserFromStorage();
+  //     return () => {
+  //       console.log('home is unfocused');
+  //     };
+  //   }, []),
+  // );
 
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -137,6 +138,7 @@ const HomeScreen = () => {
         width: '100%',
         backgroundColor: '#F5F5ED',
         alignContent: 'center',
+        marginBottom:65
       }}>
     <ScrollView style={styles.container}>
       <View style={styles.container1}>
@@ -206,7 +208,7 @@ const HomeScreen = () => {
         </View>
       </View>
       <TopAssistants/>
-      <Assistants/>
+      <Advertisement/>
       {/* <View style={styles.container2}>
         <TouchableOpacity onPress={() => console.log('hello')}>
           <View style={styles.container2_Content}>

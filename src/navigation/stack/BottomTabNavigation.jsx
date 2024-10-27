@@ -5,6 +5,9 @@ import Profile from '../../screens/profile';
 import HomeScreen from '../../screens/home';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LocationsScreen from '../../screens/locations';
+import ExerciseSchedule from '../../screens/excersie';
+import personalAssistants from '../../screens/personalAssistants';
+import PersonalAssistants from '../../screens/personalAssistants';
 
 const tab = createBottomTabNavigator();
 
@@ -50,7 +53,7 @@ const BottomTabNavigation = () => {
 
       <tab.Screen
         name="ExcerciseScreen"
-        component={Profile}
+        component={ExerciseSchedule}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
@@ -66,7 +69,7 @@ const BottomTabNavigation = () => {
 
       <tab.Screen
         name="DietScreen"
-        component={Profile}
+        component={PersonalAssistants}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
@@ -74,7 +77,7 @@ const BottomTabNavigation = () => {
               style={{width: 22, height:22, tintColor: focused ? '#18423B' : '#6F6F6F'}}
             />
           ),
-          title: 'Diet',
+          title: 'Trainers',
           tabBarInactiveTintColor: '#6F6F6F',
           tabBarActiveTintColor: '#18423B',
         }}

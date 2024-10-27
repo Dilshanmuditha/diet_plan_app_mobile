@@ -20,7 +20,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const TopAssistants = () => {
   const navigation = useNavigation();
   const [accounts, setAccounts] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
+  const randomNames = [
+    'Alex Johnson', 'Chris Evans', 'Jordan Brown', 'Taylor Swift', 
+    'Morgan Lee', 'Jamie Foxx', 'Casey Grant', 'Robin White'
+  ];
+  const getRandomPersonImage = () => `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/100/100`;
+  const getRandomName = () => randomNames[Math.floor(Math.random() * randomNames.length)];
 
 //   const fetchRecentToysData = async () => {
 //     try {
@@ -47,32 +53,32 @@ const TopAssistants = () => {
         const data = [
             {
                 "id":1,
-                "name" : "Dilshan Muditha",
-                "Experience" : "Dilshan Muditha",
+                "name" : getRandomName(),
+                "Experience" : "Bigginer",
                 "Review" : "5",
                 "Age" : "20",
                 "sex" : "M"
             },
             {
                 "id":2,
-                "name" : "Dilshan Muditha",
-                "Experience" : "Dilshan Muditha",
+                "name" : getRandomName(),
+                "Experience" : "Expert",
                 "Review" : "5",
                 "Age" : "20",
                 "sex" : "M"
             },
             {
                 "id":3,
-                "name" : "Dilshan Muditha",
-                "Experience" : "Dilshan Muditha",
+                "name" : getRandomName(),
+                "Experience" : "Intermediate",
                 "Review" : "5",
                 "Age" : "20",
                 "sex" : "M"
             },
             {
                 "id":4,
-                "name" : "Dilshan Muditha",
-                "Experience" : "Dilshan Muditha",
+                "name" : getRandomName(),
+                "Experience" : "Begineer",
                 "Review" : "5",
                 "Age" : "20",
                 "sex" : "M"
@@ -97,7 +103,7 @@ const TopAssistants = () => {
            {}
           }>
           <Image
-            source={require('../assets/persons/profile.jpeg')}
+            source={{uri: getRandomPersonImage()}} // Use the random person image URL
             style={styles.image}
           />
          <Text style={styles.name}>
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
   view: { 
     backgroundColor: '#ffffff',
     margin: 7,
-    width: 150,
+    width: 130,
     paddingHorizontal: 10,
   },
   viewTouch: { 

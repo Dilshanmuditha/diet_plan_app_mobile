@@ -31,12 +31,12 @@ const Routes = () => {
         <Stack.Screen name="WelcomeScreenTwo" component={WelcomeTwo} />
         <Stack.Screen name="LoginScreen" component={Login} />
         <Stack.Screen name="RegisterScreen" component={Register} />
-        <Stack.Screen name="CameraScreen" component={CameraComponent} />
-        <Stack.Screen name="HeightDetectScreen" component={HeightDetect} />
+        {/* <Stack.Screen name="CameraScreen" component={CameraComponent} />
+        <Stack.Screen name="HeightDetectScreen" component={HeightDetect} /> */}
         {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
-        <Stack.Screen name="BackImgScreen" component={BackImageScreen} />
-        <Stack.Screen name="SideImgScreen" component={SideImageScreen} />
-        <Stack.Screen name="FrontImgScreen" component={FrontImageScreen} />
+        {/* <Stack.Screen name="BackImgScreen" component={BackImageScreen} />
+        <Stack.Screen name="SideImgScreen" component={SideImageScreen} /> */}
+        {/* <Stack.Screen name="FrontImgScreen" component={FrontImageScreen} /> */}
         <Stack.Screen name="ExerciseScheduleScreen" component={ExerciseSchedule} />
         <Stack.Screen
           name="protectedScreen"
